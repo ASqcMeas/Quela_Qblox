@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', ".."))
 from numpy import array, linspace, pi, arange, sqrt, ndarray
 from utils.tutorial_utils import show_args
 from qcodes.parameters import ManualParameter
@@ -10,7 +10,6 @@ from quantify_core.measurement.control import MeasurementControl
 from Modularize.support.Path_Book import find_latest_QD_pkl_for_dr, meas_raw_dir
 from Modularize.support import init_meas, init_system_atte, shut_down, coupler_zctrl
 from Modularize.Configs.Experiment_setup import get_CouplerController, ip_register
-from utils.tutorial_analysis_classes import ResonatorFluxSpectroscopyAnalysis
 from Modularize.support.Pulse_schedule_library import RabiSplitting_multi_sche, pulse_preview
 from Modularize.analysis.Multiplexing_analysis import Multiplex_analyzer
 from Modularize.analysis.raw_data_demolisher import fluxCoupler_dataReducer
