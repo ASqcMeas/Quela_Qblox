@@ -2,6 +2,7 @@ class Exp_Encyclopedia():
     def __init__(self,exp_type:str):
         """
         exp_type should be in the following:\n
+            S0. MeasInitializer
             S1. BroadBandCS,
             S2. ZoomCS,
             S3. PowerCavity,
@@ -21,9 +22,14 @@ class Exp_Encyclopedia():
             A1. TimeMonitor,
             A2. ZgateT1
         """
+        self.__SurveyUniqueName__:str = "ExpParasSurvey"
         self.__exp__ = exp_type.lower()
         self.__expVarable_Reminder__()
         self.__shared_attr__ = ["avg_n", "exp_type", "machine_IP"]
+    def __setMeasInit__(self):
+        self.sample_name:str = ""
+        self.how_many_qubits:int = 0
+        self.how_many_couplers:int=0
 
     def __setMachineIP__(self):
         """ `<class, 'str'>`, Single value """
@@ -39,7 +45,15 @@ class Exp_Encyclopedia():
 
     def __expVarable_Reminder__(self):
         match self.__exp__:
+            case "s0" | "init" | "measinitializer":
+                self.__setMeasInit__()
+
             case "s1" | "broadbandcs" | "bbcs":
+                self.__setMachineIP__()
+                self.__setFreqRange__()
+                self.__setExpAVGn__()
+                
+            case "s2" | "cs" | "zoomcs":
                 self.__setMachineIP__()
                 self.__setFreqRange__()
                 self.__setExpAVGn__()

@@ -1,14 +1,15 @@
-import os, sys, time, inspect, tomli
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', ".."))
+import os, tomli
 from Modularize.Council.MainBrain import Exp_Encyclopedia
+user = os.getlogin()
+user_dep_config_folder = f"C:/Users/{user}/MeasConfigs" # should all ways one file which name as "S?_ExpParasSurvey.toml"
 
 class Coordinator(Exp_Encyclopedia):
-    def __init__(self, toml_path:str):
-        self.__toml_path__ = toml_path
+    def __init__(self, specific_config_path:str=None):
         super().__init__(exp_type="_")
+        self.__toml_path__ =  [os.path.join(user_dep_config_folder,name) for name in os.listdir(user_dep_config_folder) if (os.path.isfile(os.path.join(user_dep_config_folder,name)) and name.split(".")[0].split("_")[-1]==self.__SurveyUniqueName__)][0] if specific_config_path is None else specific_config_path
         self.__toml_decoder__()
-        
 
+    
     def __toml_decoder__(self):
         # Load data from TOML file
         with open(self.__toml_path__, "rb") as file:
@@ -32,4 +33,4 @@ class Coordinator(Exp_Encyclopedia):
 
 
 if __name__ == "__main__":
-    Paras = Coordinator("/Users/ratiswu/Documents/GitHub/Quela_Qblox/S1_ExpParasServey.toml")
+    SurveyResults = Coordinator()
