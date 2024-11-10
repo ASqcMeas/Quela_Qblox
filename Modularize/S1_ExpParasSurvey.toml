@@ -1,0 +1,14 @@
+# Measurement paras configs editor
+
+avg_n =        # type in  <class 'int'>
+machine_IP = '  ' # type in str 
+list_sampling_func = '  ' # linspace or arange 
+
+[q0]
+  freq_range =        # type in list, rule: [ start, end, pts ] or [ fixed value ]
+
+
+[q1]
+  freq_range =        # type in list, rule: [ start, end, pts ] or [ fixed value ]
+
+
