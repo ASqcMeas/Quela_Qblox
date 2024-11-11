@@ -1,5 +1,6 @@
 from numpy import ndarray
 from types import FunctionType
+from abc import abstractmethod
 
 def empty_func():FunctionType
 
@@ -28,18 +29,33 @@ class Exp_Encyclopedia():
             A2. ZgateT1
         """
         self.__SurveyUniqueName__:str = "ExpParasSurvey"
+        
         self.__machine_type__ = machine_type
         self.__exp__ = exp_type.lower()
         self.__expVarable_Reminder__()
         self.__shared_attr__ = ["avg_n", "machine_IP", "list_sampling_func"] # importanat 
+
+    @abstractmethod
+    def __ExpParasCollects__(self, *args, **kwargs):
+        """ Exp execution 1st step, collect meas paras """
+        pass
+    @abstractmethod
+    def __ExpExecutes__(self, *args, **kwargs):
+        """ Exp execution 2nd step, Execute measurements """
+        pass
+    @abstractmethod
+    def __ExpResultsAnalyzes__(self, *args, **kwargs):
+        """ Exp execution 3rd step, analyze the exp results """
+        pass
     
     def __setMeasInit__(self):
-        self.Instrument_IP:str = ""
+        self.Instrument_IP:str = "" 
         self.how_many_couplers:int = 0
         self.how_many_qubits:int = 0
         self.cool_down_date:str = ""
         self.cool_down_dr:str = ""
         self.sample_name:str = ""
+        self.chip_type:str = ""
 
     def __setMachineIP__(self):
         """ `<class, 'str'>`, Single value """
@@ -83,7 +99,7 @@ class Exp_Encyclopedia():
     def __CoordsDecode__(self,coordsProtocol:dict,joint_qbs:list,function:callable=None,**kwargs):
         result = {}
         layer_2_configs = coordsProtocol["2F"]
-        print(function)
+    
         for qb in joint_qbs:
             result[qb] = {}
 
@@ -96,4 +112,81 @@ class Exp_Encyclopedia():
                 else:
                     raise KeyError(f"Missing the variable {variable_name} for layer '2F' in kwargs !")
             
-        return result    
+        return result  
+
+
+
+class ExpSpirit():
+    def __init__(self):
+        self.set_variables()
+        # self.ro_elements, self.machine_type = FBI.decode()
+        self.set_pulseSchedule()
+        self.set_analysis()
+
+    @abstractmethod
+    def set_variables(self,*args):
+        pass
+
+    @abstractmethod
+    def set_pulseSchedule(self,system:str,*args):
+        pass
+
+    @abstractmethod
+    def set_analysis(self,*args):
+        pass
+
+
+
+
+# class CS(ExpSpirit):
+#     def __init__(self):
+#         super().__init__()
+#         self.workflow()
+
+
+#     def set_variables(self):
+#         self.freq_range = list([])
+    
+
+#     def set_pulseSchedule(self,):
+#         match self.machine_type:
+#             case qblox:
+#                 from A import B_ps, B_ana
+#                 self.raw_data = []
+
+    
+#     def set_analysis(self,*args):
+#         fig = B_ana(self.raw_data)
+
+    
+#     def workflow(self):
+#         self.set_variables()
+#         self.ro_elements, self.machine_type = FBI.decode()
+#         self.set_pulseSchedule()
+#         self.set_analysis()
+
+
+class FC(ExpSpirit):
+    def __init__(self):
+        super().__init__()
+        
+
+
+
+    def set_variables(self):
+        self.freq_range = list([])
+        self.flux_range = list([])
+        print("1")
+    
+
+    def set_pulseSchedule(self,):
+        print("2")
+        self.raw_data = []
+
+    
+    def set_analysis(self,*args):
+        print("3")
+
+
+if __name__ == "__main__":
+    A = FC()

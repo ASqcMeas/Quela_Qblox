@@ -1,20 +1,34 @@
 import os, tomli
-from Modularize.Association.MainBrain import Exp_Encyclopedia
+from Association.Soul import Exp_Encyclopedia
 from Modularize.Association.Housekeeper import Maid
 from Modularize.Association.FBI import Canvasser
 
 
-class Coordinator(Exp_Encyclopedia):
+class Coordinator():
     
     def __init__(self):
+       pass
+
+
+    def __ExpParasCollects__(self, *args, **kwargs):
         Agent = Canvasser("_",[])
-        self.ro_elements:dict = Agent.__toml_decoder__(r"C:\Users\ASqcm\MeasConfigs\S1_ExpParasSurvey.toml")
-        machine_IP:str = Agent.__assined_paras__["machine_IP"]
-        self.intrument_type:str = Agent.__exp_machine_type__
+        self.shared_settings, self.ro_elements, self.bias_elements = Agent.__toml_decoder__()
+        self.exp = Agent.exp_type
+        self.machine_IP:str = Agent.assigned_paras["machine_IP"]
+        self.intrument_type:str = Agent.exp_machine_type
 
-
-    def __prepareAmeas__(self):
+    def __ExpExecutes__(self, *args, **kwargs):
         pass
+
+    def __ExpResultsAnalyzes__(self, *args, **kwargs):
+        pass
+
+    def MeasWorkFlow(self):
+        self.__ExpParasCollects__()
+
+        self.__ExpExecutes__()
+
+        self.__ExpResultsAnalyzes__()
 
 
 
