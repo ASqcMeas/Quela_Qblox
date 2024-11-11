@@ -35,19 +35,6 @@ class Exp_Encyclopedia():
         self.__expVarable_Reminder__()
         self.__shared_attr__ = ["avg_n", "machine_IP", "list_sampling_func"] # importanat 
 
-    @abstractmethod
-    def __ExpParasCollects__(self, *args, **kwargs):
-        """ Exp execution 1st step, collect meas paras """
-        pass
-    @abstractmethod
-    def __ExpExecutes__(self, *args, **kwargs):
-        """ Exp execution 2nd step, Execute measurements """
-        pass
-    @abstractmethod
-    def __ExpResultsAnalyzes__(self, *args, **kwargs):
-        """ Exp execution 3rd step, analyze the exp results """
-        pass
-    
     def __setMeasInit__(self):
         self.Instrument_IP:str = "" 
         self.how_many_couplers:int = 0
@@ -119,7 +106,7 @@ class Exp_Encyclopedia():
 class ExpSpirit():
     def __init__(self):
         self.set_variables()
-        # self.ro_elements, self.machine_type = FBI.decode()
+        self.ro_elements, self.machine_type = "", ""# FBI.decode()
         self.set_pulseSchedule()
         self.set_analysis()
 
@@ -136,57 +123,42 @@ class ExpSpirit():
         pass
 
 
+class S0_MeasInit():
+    def __init__(self):
+        self.Instrument_IP:str = "" 
+        self.how_many_couplers:int = 0
+        self.how_many_qubits:int = 0
+        self.cool_down_date:str = ""
+        self.cool_down_dr:str = ""
+        self.sample_name:str = ""
+        self.chip_type:str = ""
 
 
-# class CS(ExpSpirit):
-#     def __init__(self):
-#         super().__init__()
-#         self.workflow()
-
-
-#     def set_variables(self):
-#         self.freq_range = list([])
-    
-
-#     def set_pulseSchedule(self,):
-#         match self.machine_type:
-#             case qblox:
-#                 from A import B_ps, B_ana
-#                 self.raw_data = []
-
-    
-#     def set_analysis(self,*args):
-#         fig = B_ana(self.raw_data)
-
-    
-#     def workflow(self):
-#         self.set_variables()
-#         self.ro_elements, self.machine_type = FBI.decode()
-#         self.set_pulseSchedule()
-#         self.set_analysis()
-
-
-class FC(ExpSpirit):
+class S1_CS(ExpSpirit):
     def __init__(self):
         super().__init__()
-        
-
+        self.workflow()
 
 
     def set_variables(self):
         self.freq_range = list([])
-        self.flux_range = list([])
-        print("1")
     
 
     def set_pulseSchedule(self,):
-        print("2")
-        self.raw_data = []
+        match self.machine_type:
+            case qblox:
+                from A import B_ps, B_ana
+                self.raw_data = []
 
     
     def set_analysis(self,*args):
-        print("3")
+        fig = B_ana(self.raw_data)
+
+    
+    def workflow(self):
+        self.set_variables()
+        self.ro_elements, self.machine_type = FBI.decode()
+        self.set_pulseSchedule()
+        self.set_analysis()
 
 
-if __name__ == "__main__":
-    A = FC()

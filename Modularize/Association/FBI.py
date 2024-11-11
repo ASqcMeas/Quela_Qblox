@@ -1,5 +1,5 @@
 import os, sys, time, inspect, tomli
-from Modularize.Association.MainBrain import Exp_Encyclopedia
+from Association.Soul import Exp_Encyclopedia
 from Modularize.Association.Housekeeper import Maid
 from numpy import linspace, arange, ndarray
 from types import FunctionType

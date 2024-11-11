@@ -1,4 +1,6 @@
 import sys, os, time, tomli
+from Modularize.support.QDmanager import QDmanager
+from .FBI import  user_dep_config_folder
 data_folder = "C:\ExpData"
 
 class Maid():
@@ -31,6 +33,18 @@ class Maid():
         for info_name, value in sample_info.items():
             info[info_name] = value.replace(" ","")
         return info
+    
+    def __createNewQD__(self,sample_folder_path:str):
+        """ For qblox system """
+        sample_info = self.__getSampleInfo__(sample_folder_path)
+        Qmanager = QDmanager(user_dep_config_folder)
+        # Check HCFG is in the config folder 
+        
+        if 
+        hcfg = 
+        Qmanager.build_new_QD(int(sample_info['how_many_qubits']),int(sample_info['how_many_couplers']),cfg,sample_info['Instrument_IP'],sample_info['cool_down_dr'],chip_name=sample_info['sample_name'],chip_type=sample_info['chip_type'])
+        Qmanager.refresh_log("new-born!")
+
 
 
 if __name__ == "__main__":

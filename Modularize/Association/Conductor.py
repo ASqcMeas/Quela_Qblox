@@ -4,7 +4,7 @@ from Modularize.Association.Housekeeper import Maid
 from Modularize.Association.FBI import Canvasser
 
 
-class Coordinator():
+class Coordinator(Exp_Encyclopedia):
     
     def __init__(self):
        pass
